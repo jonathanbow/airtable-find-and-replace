@@ -77,7 +77,11 @@ async function getStringsToFindAndReplace() {
   // enter the string you want to find...
   let stringToFind = await input.textAsync('Enter the string to find');
   // ...and the string you want to replace it with
-  let stringToReplace = await input.textAsync('Enter the string to replace it with');
+  let stringToReplace = "";
+  let replaceOrRemove = await input.buttonsAsync('Replace with a new string, or remove string?', ["Replace", "Remove"]);
+  if (replaceOrRemove == "Replace") {
+    stringToReplace = await input.textAsync('Enter the string to replace it with');
+  }
   // define a new regex based on the sting to find
   // this configuration replaces all instances of the string to find and is case sensitive
   let myRegex = new RegExp(stringToFind,"g");
